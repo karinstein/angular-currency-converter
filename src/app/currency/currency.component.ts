@@ -58,12 +58,12 @@ export class CurrencyComponent implements OnInit {
       this.currencyService.convert(inAmount,inCurr,outCurr)
         .subscribe(value => {
             this.outputAmount = value.rates[outCurr];
-            this.convertionOutput = `${inAmount} ${inCurr} = ${value.rates[outCurr]} ${outCurr}`;
+            this.convertionOutput = `${inAmount} ${inCurr} = ${value.rates[outCurr].toFixed(2)} ${outCurr}`;
         });
         this.currencyService.convert(1,inCurr,outCurr)
           .subscribe(value => {
               this.convertionDate = `Convertion rate on ${value.date}:`;
-              this.convertionRate = `${value.amount} ${inCurr} = ${value.rates[outCurr]} ${outCurr}`;
+              this.convertionRate = `${value.amount} ${inCurr} = ${value.rates[outCurr].toFixed(4)} ${outCurr}`;
           });
         this.formSubmitted = true;
     }
