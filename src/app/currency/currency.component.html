@@ -1,0 +1,37 @@
+
+<div class="currency">
+  <mat-form-field appearance="fill">
+    <mat-label for="amount">Convert </mat-label>
+    <input matInput id="amount" type="number" [(ngModel)]="inputAmount" placeholder="Amount">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>From currency</mat-label>
+    <mat-select [(ngModel)]="inputCurrency.id">
+      <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+        {{currency.id}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>to currency</mat-label>
+    <mat-select [(ngModel)]="outputCurrency.id">
+      <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+        {{currency.id}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+  <div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency">
+    <span>{{inputAmount}} {{inputCurrency.id | uppercase}} </span>
+    <span> = {{outputAmount}} {{outputCurrency.id | uppercase}}</span>
+  </div>
+</div>
+
+<br>
+<h2>Currency List</h2>
+<ul class="currency">
+  <li *ngFor="let currency of currencies">
+    {{currency.id}} ({{currency.description}})
+  </li>
+</ul>
