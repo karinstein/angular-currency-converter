@@ -4,14 +4,14 @@
   padding: 0;
   width: 15em;
 }
-.currency li, #converter {
+.currency li {
   /* cursor: pointer; */
   position: relative;
   left: 0;
   background-color: #EEE;
   margin: .5em;
   /* padding: .3em 0; */
-  padding: .5em;
+  padding: .3em 0;
   height: 1.6em;
   border-radius: 4px;
 }
@@ -53,21 +53,4 @@ input {
 
 h2 {
   margin-left: 1em;
-}
-
-button {
-  float: right;
-  margin-right: 1em;
-}
-
-.rate {
-  width: 100%;
-  height: auto;
-  color: #2c3a41;
-  position: relative;
-  left: 0;
-  /* background-color: #EEE; */
-  margin: .5em;
-  padding: .5em;
-  border-radius: 4px;
 }

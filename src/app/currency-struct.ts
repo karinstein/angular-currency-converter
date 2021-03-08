@@ -1,4 +1,4 @@
-export interface Currency {
+export interface CurrencyStruct {
   id: string;
   description: string;
 }

@@ -3,9 +3,9 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Currency } from './currency';
-import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+import { CurrencyStruct } from './currency-struct';
+// import { Hero } from './hero';
+// import { HEROES } from './mock-heroes';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -18,8 +18,6 @@ export class CurrencyService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  // https://api.frankfurter.app/currencies
-  // latest?from=USD&to=GBP,EUR
   private host = 'api.frankfurter.app';
   private latestRatesUrl = `https://${this.host}/latest`;
 
@@ -27,7 +25,7 @@ export class CurrencyService {
     let currenciesUrl = `https://${this.host}/currencies`;
     let rates =  this.http.get<any>(currenciesUrl)
     .pipe(
-      // tap(_ => this.log('fetched rates')),
+      // tap(_ => this.log('fetched rates')), // WHAT DOES THIS DO??
       catchError(this.handleError<any>('getRates', []))
     );
     return rates;
@@ -39,6 +37,7 @@ export class CurrencyService {
     console.log(convertionUrl);
     let outAmount =  this.http.get<any>(convertionUrl)
     .pipe(
+      // tap(_ => this.log('fetched rates')),
       catchError(this.handleError<any>('convert', []))
     );
     return outAmount;

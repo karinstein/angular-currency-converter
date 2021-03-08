@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>to currency</mat-label>
+      <mat-label>To currency</mat-label>
       <mat-select required [(ngModel)]="outputCurrency.id" [ngModelOptions]="{standalone: true}">
         <mat-option *ngFor="let currency of currencies" [value]="currency.id">
           {{currency.id}}
@@ -26,14 +26,10 @@
 </div>
 
 <br>
-<div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency">
-  <span> {{convertionOutput | uppercase}} </span>
+<!-- <div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency"> -->
+<div *ngIf="formSubmitted">
+  <div id="converter" class="currency"><h2>{{convertionOutput | uppercase}}</h2> </div>
+  <div class="rate">
+    <h3> {{convertionDate}} {{convertionRate | uppercase}} </h3>
+  </div>
 </div>
-
-<br>
-<h2>Currency List</h2>
-<ul class="currency">
-  <li *ngFor="let currency of currencies">
-    {{currency.id}} ({{currency.description}})
-  </li>
-</ul>

@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+// import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CurrencyComponent } from './currency/currency.component';
+import { CurrencyListComponent } from './currency-list/currency-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CurrencyComponent } from './currency/currency.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    CurrencyComponent
+    CurrencyComponent,
+    CurrencyListComponent
   ],
   imports: [
     HttpClientModule,
@@ -32,7 +34,7 @@ import { CurrencyComponent } from './currency/currency.component';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatAutocompleteModule,
+    // MatAutocompleteModule,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule
