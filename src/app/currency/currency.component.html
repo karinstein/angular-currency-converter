@@ -1,31 +1,33 @@
 
 <div class="currency">
-  <mat-form-field appearance="fill">
-    <mat-label for="amount">Convert </mat-label>
-    <input matInput id="amount" type="number" [(ngModel)]="inputAmount" placeholder="Amount">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>From currency</mat-label>
-    <mat-select [(ngModel)]="inputCurrency.id">
-      <mat-option *ngFor="let currency of currencies" [value]="currency.id">
-        {{currency.id}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>to currency</mat-label>
-    <mat-select [(ngModel)]="outputCurrency.id">
-      <mat-option *ngFor="let currency of currencies" [value]="currency.id">
-        {{currency.id}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label for="amount">Amount to be converted</mat-label>
+      <input matInput required id="amount" type="number" min=0 [(ngModel)]="inputAmount" placeholder="Amount" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>From currency</mat-label>
+      <mat-select required [(ngModel)]="inputCurrency.id" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+          {{currency.id}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>to currency</mat-label>
+      <mat-select required [(ngModel)]="outputCurrency.id" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+          {{currency.id}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="button" type="submit"> Convert </button>
+  </form>
+</div>
 
-  <br>
-  <div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency">
-    <span>{{inputAmount}} {{inputCurrency.id | uppercase}} </span>
-    <span> = {{outputAmount}} {{outputCurrency.id | uppercase}}</span>
-  </div>
+<br>
+<div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency">
+  <span> {{convertionOutput | uppercase}} </span>
 </div>
 
 <br>

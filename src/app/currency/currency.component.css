@@ -1,11 +1,11 @@
 .currency {
-  margin: 0 0 2em 0;
+  margin: 0 0 2em 1em;
   list-style-type: none;
   padding: 0;
   width: 15em;
 }
 .currency li {
-  cursor: pointer;
+  /* cursor: pointer; */
   position: relative;
   left: 0;
   background-color: #EEE;
@@ -14,7 +14,7 @@
   height: 1.6em;
   border-radius: 4px;
 }
-.currency li:hover {
+/* .currency li:hover {
   color: #2c3a41;
   background-color: #e6e6e6;
   left: .1em;
@@ -30,7 +30,7 @@
 .currency li.selected:active {
   background-color: black;
   color: white;
-}
+} */
 .currency .badge {
   display: inline-block;
   font-size: small;
@@ -50,12 +50,6 @@ input {
   padding: .5rem;
 }
 
-/* .example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+h2 {
+  margin-left: 1em;
 }
-
-.example-full-width {
-  width: 100%;
-} */

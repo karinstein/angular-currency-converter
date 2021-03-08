@@ -21,48 +21,29 @@ export class CurrencyService {
   // https://api.frankfurter.app/currencies
   // latest?from=USD&to=GBP,EUR
   private host = 'api.frankfurter.app';
-  private ratesUrl = `https://${this.host}/latest`; // 'api/heroes';  // URL to web api
-  //private heroesUrl = `https://${this.host}/currencies`;
+  private latestRatesUrl = `https://${this.host}/latest`;
 
   getRates(): Observable<any> {
     let currenciesUrl = `https://${this.host}/currencies`;
-    // return this.http.get<any>(this.heroesUrl)
     let rates =  this.http.get<any>(currenciesUrl)
     .pipe(
       // tap(_ => this.log('fetched rates')),
       catchError(this.handleError<any>('getRates', []))
     );
     return rates;
-    // return of(rates); // WHY DOESN'T THIS WORK?!!!??? 
+    // return of(rates); // WHY DOESN'T THIS WORK?!!!???
   }
-    //  getHeroes(): Observable<Hero[]> {
-    //     const heroes = of(HEROES);
-    //     this.messageService.add('HeroService: fetched heroes');
-    //     return heroes;
-    //   }
 
- // getHeroes(): Observable<Hero[]> {
- //     const heroes = of(HEROES);
- //     this.messageService.add('HeroService: fetched heroes');
- //     return heroes;
- //   }this.getRates().subscribe(currency => console.log(currency.rates));
-  //   this.messageService.add('CurrencyService: fetched rates');
-  //   return of(HEROES);
-  // }
-
-
-  // getHeroes(): Observable<Hero[]> {
-  //   return this.http.get<Hero[]>(this.heroesUrl)
-  //     .pipe(
-  //       catchError(this.handleError<Hero[]>('getHeroes', []))
-  //     );
-  // }
-
-  // getHeroes(): Observable<Hero[]> {
-  //   this.getRates().subscribe(currency => console.log(currency.rates));
-  //   this.messageService.add('CurrencyService: fetched rates');
-  //   return of(HEROES);
-  // }
+  convert(inAmount: number,inCurr: string,outCurr:string): Observable<any> {
+    let convertionUrl = `${this.latestRatesUrl}?amount=${inAmount}&from=${inCurr}&to=${outCurr}`;
+    console.log(convertionUrl);
+    let outAmount =  this.http.get<any>(convertionUrl)
+    .pipe(
+      catchError(this.handleError<any>('convert', []))
+    );
+    return outAmount;
+    // return of(inAmount);
+  }
 
   // getHero(id: number): Observable<Hero> {
   //   this.messageService.add(`HeroService: fetched hero id=${id}`);

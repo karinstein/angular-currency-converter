@@ -28,6 +28,7 @@ export class CurrencyComponent implements OnInit {
     description: ''
   };
   outputAmount: number = 0;
+  convertionOutput: string = '';
 
   currencies: Currency[] = [];
 
@@ -44,23 +45,22 @@ export class CurrencyComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    this.getCurrencies();
-
-    // this.filteredOptions = this.myControl.valueChanges
-    // .pipe(
-    //   startWith(''),
-    //   map(value => typeof value === 'string' ? value : value.id),
-    //   map(id => id ? this._filter(id) : this.currencies.slice())
-    // );
+  onSubmit(): void {
+    let inAmount: number = this.inputAmount;
+    let inCurr: string = this.inputCurrency.id;
+    let outCurr: string = this.outputCurrency.id;
+    if (inAmount>0 && inCurr.length>0 && outCurr.length>0){
+      this.currencyService.convert(inAmount,inCurr,outCurr)
+        .subscribe(value => {
+            this.outputAmount = value.rates[outCurr];
+            this.convertionOutput = `${inAmount} ${inCurr} = ${value.rates[outCurr]} ${outCurr}`;
+        });
+    }
   }
 
-  // displayFn(curr: Currency): string {
-  //   return (curr && curr.id) ? curr.id : '';
-  // }
-  //
-  // private _filter(name: string): Currency[] {
-  //   const filterValue = name.toUpperCase();
-  //   return this.currencies.filter(curr => curr.id.toUpperCase().indexOf(filterValue) === 0);
-  // }
+  ngOnInit(): void {
+    this.getCurrencies();
+    this.outputAmount = this.inputAmount;
+  }
+
 }
