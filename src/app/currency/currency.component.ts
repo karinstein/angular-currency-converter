@@ -34,6 +34,7 @@ export class CurrencyComponent implements OnInit {
 
   formSubmitted: boolean = false;
 
+// requests list of available currencies from the Currency Service
   getCurrencies(): void {
     this.currencyService.getRates()
       .subscribe(currencies => {
@@ -47,6 +48,7 @@ export class CurrencyComponent implements OnInit {
       });
   }
 
+// tests input values for validity
   validInput(inAm:number, inCur:string, outCur:string): boolean {
     return (inAm>0 && inAm<=this.maxInputValue && inCur.length>0 && outCur.length>0 && inCur!==outCur);
   }
@@ -56,6 +58,8 @@ export class CurrencyComponent implements OnInit {
     let inCurr: string = this.inputCurrency.id;
     let outCurr: string = this.outputCurrency.id;
 
+// subscribes for an observale from the Currency Service to
+// show the conversion result + conversion rate
     if (this.validInput(inAmount, inCurr, outCurr)) {
       this.currencyService.convert(inAmount, inCurr, outCurr)
         .subscribe(value => {
@@ -75,6 +79,5 @@ export class CurrencyComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrencies();
-    this.outputAmount = this.inputAmount;
   }
 }

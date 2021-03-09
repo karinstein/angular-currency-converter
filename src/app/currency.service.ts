@@ -19,16 +19,18 @@ export class CurrencyService {
   private host = 'api.frankfurter.app';
   private latestRatesUrl = `https://${this.host}/latest`;
 
+// requests a list of all available currency codes
   getRates(): Observable<any> {
     let currenciesUrl = `https://${this.host}/currencies`;
     let rates =  this.http.get<any>(currenciesUrl)
     .pipe(
-      // tap(_ => this.log('fetched rates')), // WHAT DOES THIS DO??
+      // tap(_ => this.log('fetched rates')),
       catchError(this.handleError<any>('getRates', []))
     );
     return rates;
   }
 
+// requests conversion for a given amount and a currency pair
   convert(inAmount: number,inCurr: string,outCurr:string): Observable<any> {
     let convertionUrl = `${this.latestRatesUrl}?amount=${inAmount}&from=${inCurr}&to=${outCurr}`;
     console.log(convertionUrl);

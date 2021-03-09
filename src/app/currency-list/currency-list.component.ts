@@ -16,6 +16,8 @@ export class CurrencyListComponent implements OnInit {
 
   currencies: CurrencyStruct[] = [];
 
+// subscribes for an observale from the Currency Service to
+// show list of available currency codes with descriptions
   getCurrencies(): void {
     this.currencyService.getRates()
       .subscribe(currencies => {
