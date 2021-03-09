@@ -4,6 +4,7 @@
   padding: 0;
   width: 15em;
 }
+
 .currency li, #converter {
   /* cursor: pointer; */
   position: relative;
@@ -12,32 +13,16 @@
   margin: .5em;
   /* padding: .3em 0; */
   padding: .5em;
-  height: 1.6em;
+  /* height: 1.6em; */
   border-radius: 4px;
 }
-/* .currency li:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-  left: .1em;
-}
-.currency li.selected {
-  background-color: black;
-  color: white;
-}
-.currency li.selected:hover {
-  background-color: #505050;
-  color: white;
-}
-.currency li.selected:active {
-  background-color: black;
-  color: white;
-} */
+
 .currency .badge {
   display: inline-block;
   font-size: small;
   color: white;
   padding: 0.8em 0.7em 0 0.7em;
-  background-color:#405061;
+  background-color: #405061;
   line-height: 1em;
   position: relative;
   left: -1px;
@@ -49,10 +34,6 @@
 
 input {
   padding: .5rem;
-}
-
-h2 {
-  margin-left: 1em;
 }
 
 button {

@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
   templateUrl: './currency-list.component.html',
   styleUrls: ['./currency-list.component.css']
 })
+
 export class CurrencyListComponent implements OnInit {
 
   constructor(private currencyService: CurrencyService) { }
@@ -31,5 +32,4 @@ export class CurrencyListComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrencies();
   }
-
 }

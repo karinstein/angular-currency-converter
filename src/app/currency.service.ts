@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { CurrencyStruct } from './currency-struct';
-// import { Hero } from './hero';
-// import { HEROES } from './mock-heroes';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -29,7 +27,6 @@ export class CurrencyService {
       catchError(this.handleError<any>('getRates', []))
     );
     return rates;
-    // return of(rates); // WHY DOESN'T THIS WORK?!!!???
   }
 
   convert(inAmount: number,inCurr: string,outCurr:string): Observable<any> {
@@ -44,19 +41,10 @@ export class CurrencyService {
     // return of(inAmount);
   }
 
-  // getHero(id: number): Observable<Hero> {
-  //   this.messageService.add(`HeroService: fetched hero id=${id}`);
-  //   let heroes = of(HEROES.find(hero => hero.id === id)!);
-  //   return heroes;
-  // }
-
 private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
+      console.error(error);
       this.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

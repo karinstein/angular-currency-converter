@@ -4,19 +4,15 @@ import { CurrencyService } from '../currency.service';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-// import {map, startWith} from 'rxjs/operators'; // material
-
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
   styleUrls: ['./currency.component.css']
 })
+
 export class CurrencyComponent implements OnInit {
 
   constructor(private currencyService: CurrencyService) { }
-
-  // myControl = new FormControl(); // material
-  // filteredOptions: Observable<Currency[]>; // material
 
   inputCurrency: CurrencyStruct = {
     id: '',
@@ -32,6 +28,7 @@ export class CurrencyComponent implements OnInit {
   convertionOutput: string = '';
   convertionRate: string = '';
   convertionDate: string = '';
+  maxInputValue: number = 1e+10-1;
 
   currencies: CurrencyStruct[] = [];
 
@@ -40,7 +37,7 @@ export class CurrencyComponent implements OnInit {
   getCurrencies(): void {
     this.currencyService.getRates()
       .subscribe(currencies => {
-        let tempArray: CurrencyStruct []  = Object.entries(currencies).map(item =>  {
+        let tempArray: CurrencyStruct[] = Object.entries(currencies).map(item => {
           return {
             id: item[0],
             description: item[1] as string
@@ -50,22 +47,29 @@ export class CurrencyComponent implements OnInit {
       });
   }
 
+  validInput(inAm:number, inCur:string, outCur:string): boolean {
+    return (inAm>0 && inAm<=this.maxInputValue && inCur.length>0 && outCur.length>0 && inCur!==outCur);
+  }
+
   onSubmit(): void {
     let inAmount: number = this.inputAmount;
     let inCurr: string = this.inputCurrency.id;
     let outCurr: string = this.outputCurrency.id;
-    if (inAmount>0 && inCurr.length>0 && outCurr.length>0 && inCurr!==outCurr){
-      this.currencyService.convert(inAmount,inCurr,outCurr)
+
+    if (this.validInput(inAmount, inCurr, outCurr)) {
+      this.currencyService.convert(inAmount, inCurr, outCurr)
         .subscribe(value => {
-            this.outputAmount = value.rates[outCurr];
-            this.convertionOutput = `${inAmount} ${inCurr} = ${value.rates[outCurr].toFixed(2)} ${outCurr}`;
+          this.outputAmount = value.rates[outCurr];
+          this.convertionOutput = `${inAmount} ${inCurr} = ${value.rates[outCurr].toFixed(2)} ${outCurr}`;
         });
-        this.currencyService.convert(1,inCurr,outCurr)
-          .subscribe(value => {
-              this.convertionDate = `Convertion rate on ${value.date}:`;
-              this.convertionRate = `${value.amount} ${inCurr} = ${value.rates[outCurr].toFixed(4)} ${outCurr}`;
-          });
-        this.formSubmitted = true;
+      this.currencyService.convert(1, inCurr, outCurr)
+        .subscribe(value => {
+          this.convertionDate = `Convertion rate on ${value.date}:`;
+          this.convertionRate = `${value.amount} ${inCurr} = ${value.rates[outCurr].toFixed(4)} ${outCurr}`;
+        });
+      this.formSubmitted = true;
+    } else {
+      alert('Please make sure your input value does not exceed a certain range');
     }
   }
 
@@ -73,5 +77,4 @@ export class CurrencyComponent implements OnInit {
     this.getCurrencies();
     this.outputAmount = this.inputAmount;
   }
-
 }

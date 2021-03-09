@@ -1,9 +1,8 @@
-
 <div class="currency">
   <form (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
-      <mat-label for="amount">Amount to be converted</mat-label>
-      <input matInput required id="amount" type="number" min=0 [(ngModel)]="inputAmount" placeholder="Amount" [ngModelOptions]="{standalone: true}">
+      <mat-label for="amount">Amount (max {{maxInputValue-1}}) </mat-label>
+      <input matInput required id="amount" type="number" min="0" max="{{maxInputValue}}" [(ngModel)]="inputAmount" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>From currency</mat-label>
@@ -26,9 +25,10 @@
 </div>
 
 <br>
-<!-- <div class="currency" *ngIf="inputAmount && inputCurrency && outputCurrency"> -->
 <div *ngIf="formSubmitted">
-  <div id="converter" class="currency"><h2>{{convertionOutput | uppercase}}</h2> </div>
+  <div id="converter" class="currency">
+    <h2>{{convertionOutput | uppercase}}</h2>
+  </div>
   <div class="rate">
     <h3> {{convertionDate}} {{convertionRate | uppercase}} </h3>
   </div>
